@@ -1,3 +1,5 @@
+/* (c) Irina Astafeva, 2023 */
+
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,14 +12,13 @@ public class UIController : MonoBehaviour
     public Slider Progress;
     public Text CurrentLevel;
     public Text NextLevel;
-
-    private bool _isMute = false;
+    public Player Player;
 
     private void Awake()
     {
         SetWinPanel(false);
         SetLosePanel(false);
-        SetSound(_isMute);
+        SetSound(Player.IsMute());
     }
 
     public void SetLevel(int level)
@@ -30,7 +31,6 @@ public class UIController : MonoBehaviour
     {
         Mute.SetActive(doMute);
         Unmute.SetActive(!doMute);
-        _isMute = doMute;
     }
 
     public void SetProgress(float progress)
@@ -51,7 +51,9 @@ public class UIController : MonoBehaviour
 
     public void OnSoundButtonClick()
     {
-        SetSound(!_isMute);
+        bool isMute = Player.IsMute();
+        Player.DoMute(!isMute);
+        SetSound(!isMute);
     }
 
     public void OnRestartButtonClick()

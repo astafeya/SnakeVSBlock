@@ -1,3 +1,5 @@
+/* (c) Irina Astafeva, 2023 */
+
 using UnityEngine;
 
 public class SnakePart : MonoBehaviour
@@ -63,7 +65,7 @@ public class SnakePart : MonoBehaviour
         Finish finish = otherGO.GetComponent<Finish>();
         if (finish)
         {
-            Debug.Log("Win");
+            Player.Win();
         }
     }
 }
