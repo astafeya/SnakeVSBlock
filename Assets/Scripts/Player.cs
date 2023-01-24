@@ -3,8 +3,9 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
-public class Player : PlayerData
+public class Player : MonoBehaviour
 {
     public int Lifes;
     public Rigidbody Rigidbody;
@@ -12,7 +13,7 @@ public class Player : PlayerData
     public List<SnakePart> Snake;
     public GameObject Parent;
     public GameObject SnakePartPrefab;
-    public SoundController SoundController;
+    public Game Game;
 
     [SerializeField]
     private Vector3 Offset;
@@ -26,7 +27,6 @@ public class Player : PlayerData
     {
         gameObject.SetActive(true);
         SetText();
-        SoundController.SetSoundMute(IsMute());
         Snake = new List<SnakePart>();
         Vector3 newPartPosition = new Vector3(0, 0.3f, 0);
         for (int i = 0; i <= Lifes; i++)
@@ -55,11 +55,10 @@ public class Player : PlayerData
                 Lifes++;
                 SetText();
             }
-            SoundController.PlayEatSound();
+            Game.OnPlayerEat();
         } else
         {
             DeleteHead();
-            SoundController.PlayPopSound();
             Lifes--;
             if (Lifes >= 0) SetText();
             else
@@ -92,6 +91,7 @@ public class Player : PlayerData
         Snake[0].PreviousPart = null;
         }
         Destroy(oldHead.gameObject);
+        Game.OnPlayerPopHead();
     }
 
     private void SetText()
@@ -99,25 +99,13 @@ public class Player : PlayerData
         Text.text = Lifes.ToString();
     }
 
-    public bool IsMute()
-    {
-        return SoundMute == Constants.MUTE;
-    }
-
-    public void DoMute(bool value)
-    {
-        if (value) SoundMute = Constants.MUTE;
-        else SoundMute = Constants.UNMUTE;
-        SoundController.SetSoundMute(IsMute());
-    }
-
     public void Win()
     {
-        SoundController.PlayWinSound();
+        Game.OnPlayerWin();
     }
 
     public void Lose()
     {
-        SoundController.PlayLoseSound();
+        Game.OnPlayerDied();
     }
 }

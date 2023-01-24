@@ -13,4 +13,16 @@ public class PlayerData : MonoBehaviour
             PlayerPrefs.Save();
         }
     }
+
+    public Constants.State CurrentState { get; protected set; }
+
+    public int LevelIndex
+    {
+        get => PlayerPrefs.GetInt(Constants.LEVEL_INDEX_KEY, 0);
+        protected set
+        {
+            PlayerPrefs.SetInt(Constants.LEVEL_INDEX_KEY, value);
+            PlayerPrefs.Save();
+        }
+    }
 }

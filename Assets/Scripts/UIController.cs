@@ -12,13 +12,13 @@ public class UIController : MonoBehaviour
     public Slider Progress;
     public Text CurrentLevel;
     public Text NextLevel;
-    public Player Player;
+    public Game Game;
 
     private void Awake()
     {
         SetWinPanel(false);
         SetLosePanel(false);
-        SetSound(Player.IsMute());
+        SetSound(Game.IsMute());
     }
 
     public void SetLevel(int level)
@@ -51,14 +51,14 @@ public class UIController : MonoBehaviour
 
     public void OnSoundButtonClick()
     {
-        bool isMute = Player.IsMute();
-        Player.DoMute(!isMute);
+        bool isMute = Game.IsMute();
+        Game.DoMute(!isMute);
         SetSound(!isMute);
     }
 
     public void OnRestartButtonClick()
     {
-
+        Game.ReloadLevel();
     }
 
     public void OnNextLevelButtonClick()
