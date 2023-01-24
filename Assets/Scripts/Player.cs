@@ -1,8 +1,10 @@
+/* (c) Irina Astafeva, 2023 */
+
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
 
-public class Player : MonoBehaviour
+public class Player : PlayerData
 {
     public int Lifes;
     public Rigidbody Rigidbody;
@@ -10,6 +12,7 @@ public class Player : MonoBehaviour
     public List<SnakePart> Snake;
     public GameObject Parent;
     public GameObject SnakePartPrefab;
+    public SoundController SoundController;
 
     [SerializeField]
     private Vector3 Offset;
@@ -23,6 +26,7 @@ public class Player : MonoBehaviour
     {
         gameObject.SetActive(true);
         SetText();
+        SoundController.SetSoundMute(IsMute());
         Snake = new List<SnakePart>();
         Vector3 newPartPosition = new Vector3(0, 0.3f, 0);
         for (int i = 0; i <= Lifes; i++)
@@ -51,14 +55,16 @@ public class Player : MonoBehaviour
                 Lifes++;
                 SetText();
             }
+            SoundController.PlayEatSound();
         } else
         {
             DeleteHead();
+            SoundController.PlayPopSound();
             Lifes--;
             if (Lifes >= 0) SetText();
             else
             {
-                Debug.Log("Game over!");
+                Lose();
                 gameObject.SetActive(false);
             }
         }
@@ -91,5 +97,27 @@ public class Player : MonoBehaviour
     private void SetText()
     {
         Text.text = Lifes.ToString();
+    }
+
+    public bool IsMute()
+    {
+        return SoundMute == Constants.MUTE;
+    }
+
+    public void DoMute(bool value)
+    {
+        if (value) SoundMute = Constants.MUTE;
+        else SoundMute = Constants.UNMUTE;
+        SoundController.SetSoundMute(IsMute());
+    }
+
+    public void Win()
+    {
+        SoundController.PlayWinSound();
+    }
+
+    public void Lose()
+    {
+        SoundController.PlayLoseSound();
     }
 }
