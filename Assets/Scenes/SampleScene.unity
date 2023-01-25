@@ -854,7 +854,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-44826
+  m_Name: pb_Mesh-53664
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1021,6 +1021,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 194970184}
+  - component: {fileID: 194970185}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -1045,6 +1046,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &194970185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 194970183}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e745763b68a1514a82707f8e6d63c9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SoundController: {fileID: 1592105713}
+  UIController: {fileID: 3205016638220502905}
 --- !u!1 &215908583
 GameObject:
   m_ObjectHideFlags: 0
@@ -1993,7 +2008,7 @@ MonoBehaviour:
   Snake: []
   Parent: {fileID: 778897335}
   SnakePartPrefab: {fileID: 9170187556676131198, guid: 2da4f2d8d4bf26d4ba8aed19e86f5a0a, type: 3}
-  SoundController: {fileID: 1592105713}
+  Game: {fileID: 194970185}
   Offset: {x: -0.75, y: 1.4, z: 0}
   _sensitivity: 2.25
   _velosity: 30
@@ -2265,14 +2280,13 @@ MonoBehaviour:
   Lose: {fileID: 759919422}
   Pop: {fileID: 801313218}
   Win: {fileID: 627884872}
-  Player: {fileID: 971418176}
 --- !u!43 &1866371690
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh54196
+  m_Name: pb_Mesh60826
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4044,7 +4058,7 @@ MonoBehaviour:
   Progress: {fileID: 3205016637134521730}
   CurrentLevel: {fileID: 3205016638896619110}
   NextLevel: {fileID: 3205016637242021958}
-  Player: {fileID: 971418176}
+  Game: {fileID: 194970185}
 --- !u!223 &3205016638220502906
 Canvas:
   m_ObjectHideFlags: 0
