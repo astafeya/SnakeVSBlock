@@ -9,7 +9,6 @@ public class SnakePart : MonoBehaviour
     public Player Player;
     public GameObject PreviousPart;
 
-
     [SerializeField]
     private float _sensitivity/* = 2.25f*/;
     [SerializeField]
@@ -17,6 +16,15 @@ public class SnakePart : MonoBehaviour
     [SerializeField]
     private Vector3 _couner/* = new Vector3(8, 0, 2)*/;
     private float _previousMousePosition;
+    private Material _material;
+    public float _position;
+
+    private void Awake()
+    {
+        _position = 0;
+        _material = gameObject.GetComponent<MeshRenderer>().material;
+        _material.SetFloat("_Position", _position);
+    }
 
     private void Update()
     {
@@ -67,5 +75,11 @@ public class SnakePart : MonoBehaviour
         {
             Player.Win();
         }
+    }
+
+    public void SetPosition(float position)
+    {
+        _position = position;
+        _material.SetFloat("_Position", _position);
     }
 }
