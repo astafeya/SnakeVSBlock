@@ -20,7 +20,6 @@ public class Player : PlayerData
     private float _sensitivity/* = 2.25f*/;
     [SerializeField]
     private float _velosity/* = 30f*/;
-    private float _previousMousePosition;
 
     private void Awake()
     {
@@ -38,6 +37,7 @@ public class Player : PlayerData
             if (i > 0) Snake[i].PreviousPart = Snake[i - 1].gameObject;
         }
         Snake[0].IsHead = true;
+        UpdatePositions();
     }
     void Update()
     {
@@ -66,8 +66,10 @@ public class Player : PlayerData
             {
                 Lose();
                 gameObject.SetActive(false);
+                return;
             }
         }
+        UpdatePositions();
     }
 
     private void AddTail()
@@ -119,5 +121,20 @@ public class Player : PlayerData
     public void Lose()
     {
         SoundController.PlayLoseSound();
+    }
+
+    private void UpdatePositions()
+    {
+        int count = Snake.Count;
+        if (count > 1)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                float position = ((float) i) / (count - 1);
+                Debug.Log("i: " + i + ", position: " + position);
+                Snake[i].SetPosition(position);
+            }
+        }
+        else Snake[0].SetPosition(0);
     }
 }
