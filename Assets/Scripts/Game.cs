@@ -52,13 +52,13 @@ public class Game : PlayerData
 
     public bool IsMute()
     {
-        return SoundMute == Constants.MUTE;
+        return SoundMute == Constants.MUTE_KEY;
     }
 
     public void DoMute(bool value)
     {
-        if (value) SoundMute = Constants.MUTE;
-        else SoundMute = Constants.UNMUTE;
+        if (value) SoundMute = Constants.MUTE_KEY;
+        else SoundMute = Constants.UNMUTE_KEY;
         SoundController.SetSoundMute(IsMute());
     }
 }

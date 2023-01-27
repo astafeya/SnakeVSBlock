@@ -6,10 +6,10 @@ public class PlayerData : MonoBehaviour
 {
     public string SoundMute
     {
-        get => PlayerPrefs.GetString(Constants.SOUND_MUTE, Constants.UNMUTE);
+        get => PlayerPrefs.GetString(Constants.SOUND_MUTE_KEY, Constants.UNMUTE_KEY);
         protected set
         {
-            PlayerPrefs.SetString(Constants.SOUND_MUTE, value);
+            PlayerPrefs.SetString(Constants.SOUND_MUTE_KEY, value);
             PlayerPrefs.Save();
         }
     }
