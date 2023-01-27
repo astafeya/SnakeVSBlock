@@ -2,7 +2,18 @@
 
 public class Constants
 {
-    public const string SOUND_MUTE = "SoundMute";
-    public const string MUTE = "Mute";
-    public const string UNMUTE = "Unmute";
+    public enum State
+    {
+        Playing,
+        Won,
+        Loss
+    }
+
+    public const string SOUND_MUTE_KEY = "SoundMute";
+    public const string MUTE_KEY = "Mute";
+    public const string UNMUTE_KEY = "Unmute";
+
+    public const string LEVEL_INDEX_KEY = "LevelIndex";
+
+    public const string PLAYER_LIFES_KEY = "PlayerLifes";
 }

@@ -3,17 +3,18 @@
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
-public class Player : PlayerData
+public class Player : MonoBehaviour
 {
-    public int Lifes;
     public Rigidbody Rigidbody;
     public TextMeshPro Text;
     public List<SnakePart> Snake;
     public GameObject Parent;
     public GameObject SnakePartPrefab;
-    public SoundController SoundController;
+    public Game Game;
 
+    private int _lifes;
     [SerializeField]
     private Vector3 Offset;
     [SerializeField]
@@ -24,11 +25,11 @@ public class Player : PlayerData
     private void Awake()
     {
         gameObject.SetActive(true);
+        _lifes = Game.PlayerLifes;
         SetText();
-        SoundController.SetSoundMute(IsMute());
         Snake = new List<SnakePart>();
         Vector3 newPartPosition = new Vector3(0, 0.3f, 0);
-        for (int i = 0; i <= Lifes; i++)
+        for (int i = 0; i <= _lifes; i++)
         {
             GameObject newPart = Instantiate(SnakePartPrefab, newPartPosition, Quaternion.identity, Parent.transform);
             newPartPosition.z -= 0.5f;
@@ -47,21 +48,20 @@ public class Player : PlayerData
     public void ChangeLifes(int value)
     {
         if (value == 0) return;
+        _lifes += value;
+        Game.ChangeLifes(value);
         if (value > 0)
         {
             for (int i = 0; i < value; i++)
             {
                 AddTail();
-                Lifes++;
                 SetText();
             }
-            SoundController.PlayEatSound();
+            Game.OnPlayerEat();
         } else
         {
             DeleteHead();
-            SoundController.PlayPopSound();
-            Lifes--;
-            if (Lifes >= 0) SetText();
+            if (_lifes >= 0) SetText();
             else
             {
                 Lose();
@@ -94,33 +94,22 @@ public class Player : PlayerData
         Snake[0].PreviousPart = null;
         }
         Destroy(oldHead.gameObject);
+        Game.OnPlayerPopHead();
     }
 
     private void SetText()
     {
-        Text.text = Lifes.ToString();
-    }
-
-    public bool IsMute()
-    {
-        return SoundMute == Constants.MUTE;
-    }
-
-    public void DoMute(bool value)
-    {
-        if (value) SoundMute = Constants.MUTE;
-        else SoundMute = Constants.UNMUTE;
-        SoundController.SetSoundMute(IsMute());
+        Text.text = _lifes.ToString();
     }
 
     public void Win()
     {
-        SoundController.PlayWinSound();
+        Game.OnPlayerWin();
     }
 
     public void Lose()
     {
-        SoundController.PlayLoseSound();
+        Game.OnPlayerDied();
     }
 
     private void UpdatePositions()

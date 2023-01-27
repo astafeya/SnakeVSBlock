@@ -9,9 +9,7 @@ public class SoundController : MonoBehaviour
     public AudioSource Lose;
     public AudioSource Pop;
     public AudioSource Win;
-    public Player Player;
 
-    private bool _isMute;
 
     private void Awake()
     {
