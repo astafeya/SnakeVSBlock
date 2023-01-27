@@ -25,4 +25,14 @@ public class PlayerData : MonoBehaviour
             PlayerPrefs.Save();
         }
     }
+
+    public int PlayerLifes
+    {
+        get => PlayerPrefs.GetInt(Constants.PLAYER_LIFES_KEY, 4);
+        protected set
+        {
+            PlayerPrefs.SetInt(Constants.PLAYER_LIFES_KEY, value);
+            PlayerPrefs.Save();
+        }
+    }
 }

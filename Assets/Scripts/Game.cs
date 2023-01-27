@@ -19,8 +19,8 @@ public class Game : PlayerData
         if (CurrentState != Constants.State.Playing) return;
         SoundController.PlayLoseSound();
         CurrentState = Constants.State.Loss;
-        //Controls.enabled = false;
         UIController.SetLosePanel(true);
+        PlayerLifes = 4;
         Debug.Log("Game Over!");
     }
 
@@ -29,7 +29,6 @@ public class Game : PlayerData
         if (CurrentState != Constants.State.Playing) return;
         SoundController.PlayWinSound();
         CurrentState = Constants.State.Won;
-        //Controls.enabled = false;
         UIController.SetWinPanel(true);
         LevelIndex++;
         Debug.Log("You Won!");
@@ -60,5 +59,10 @@ public class Game : PlayerData
         if (value) SoundMute = Constants.MUTE_KEY;
         else SoundMute = Constants.UNMUTE_KEY;
         SoundController.SetSoundMute(IsMute());
+    }
+
+    public void ChangeLifes(int value)
+    {
+        PlayerLifes += value;
     }
 }

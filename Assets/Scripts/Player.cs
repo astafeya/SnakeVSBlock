@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    public int Lifes;
     public Rigidbody Rigidbody;
     public TextMeshPro Text;
     public List<SnakePart> Snake;
@@ -15,6 +14,7 @@ public class Player : MonoBehaviour
     public GameObject SnakePartPrefab;
     public Game Game;
 
+    private int _lifes;
     [SerializeField]
     private Vector3 Offset;
     [SerializeField]
@@ -25,10 +25,11 @@ public class Player : MonoBehaviour
     private void Awake()
     {
         gameObject.SetActive(true);
+        _lifes = Game.PlayerLifes;
         SetText();
         Snake = new List<SnakePart>();
         Vector3 newPartPosition = new Vector3(0, 0.3f, 0);
-        for (int i = 0; i <= Lifes; i++)
+        for (int i = 0; i <= _lifes; i++)
         {
             GameObject newPart = Instantiate(SnakePartPrefab, newPartPosition, Quaternion.identity, Parent.transform);
             newPartPosition.z -= 0.5f;
@@ -47,20 +48,20 @@ public class Player : MonoBehaviour
     public void ChangeLifes(int value)
     {
         if (value == 0) return;
+        _lifes += value;
+        Game.ChangeLifes(value);
         if (value > 0)
         {
             for (int i = 0; i < value; i++)
             {
                 AddTail();
-                Lifes++;
                 SetText();
             }
             Game.OnPlayerEat();
         } else
         {
             DeleteHead();
-            Lifes--;
-            if (Lifes >= 0) SetText();
+            if (_lifes >= 0) SetText();
             else
             {
                 Lose();
@@ -98,7 +99,7 @@ public class Player : MonoBehaviour
 
     private void SetText()
     {
-        Text.text = Lifes.ToString();
+        Text.text = _lifes.ToString();
     }
 
     public void Win()

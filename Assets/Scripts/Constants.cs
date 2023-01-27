@@ -14,4 +14,6 @@ public class Constants
     public const string UNMUTE_KEY = "Unmute";
 
     public const string LEVEL_INDEX_KEY = "LevelIndex";
+
+    public const string PLAYER_LIFES_KEY = "PlayerLifes";
 }
