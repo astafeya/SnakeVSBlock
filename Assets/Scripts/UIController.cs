@@ -35,7 +35,6 @@ public class UIController : MonoBehaviour
 
     public void SetProgress(float progress)
     {
-        if (progress < 0 || progress > 1) return;
         Progress.value = progress;
     }
 
@@ -63,6 +62,6 @@ public class UIController : MonoBehaviour
 
     public void OnNextLevelButtonClick()
     {
-
+        Game.ReloadLevel();
     }
 }

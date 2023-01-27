@@ -1869,7 +1869,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-33736
+  m_Name: pb_Mesh-40564
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2141,7 +2141,7 @@ PrefabInstance:
       objectReference: {fileID: 994293683}
     - target: {fileID: 3348751004753019459, guid: ee9b73162b7355d4eb9012c796c60da2, type: 3}
       propertyPath: m_VersionIndex
-      value: 660
+      value: 663
       objectReference: {fileID: 0}
     - target: {fileID: 3348751004753019460, guid: ee9b73162b7355d4eb9012c796c60da2, type: 3}
       propertyPath: m_RootOrder
@@ -2773,7 +2773,7 @@ Transform:
   m_GameObject: {fileID: 2103253627}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.062, z: 9}
-  m_LocalScale: {x: 5, y: 0.001, z: 0.5}
+  m_LocalScale: {x: 5, y: 0.001, z: 0.25}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1216228422}
@@ -3288,7 +3288,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: -120}
-  m_SizeDelta: {x: 425, y: 100}
+  m_SizeDelta: {x: 430, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3205016637159440964
 CanvasRenderer:

@@ -42,7 +42,9 @@ public class Player : MonoBehaviour
     }
     void Update()
     {
-        transform.position = Snake[0].gameObject.transform.position + Offset;
+        Vector3 snakeHeadPosition = Snake[0].gameObject.transform.position;
+        transform.position = snakeHeadPosition + Offset;
+        Game.SetProgress(snakeHeadPosition.z);
     }
 
     public void ChangeLifes(int value)
@@ -120,7 +122,6 @@ public class Player : MonoBehaviour
             for (int i = 0; i < count; i++)
             {
                 float position = ((float) i) / (count - 1);
-                Debug.Log("i: " + i + ", position: " + position);
                 Snake[i].SetPosition(position);
             }
         }

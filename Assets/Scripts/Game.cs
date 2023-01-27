@@ -8,10 +8,23 @@ public class Game : PlayerData
     public SoundController SoundController;
     public UIController UIController;
 
+    private float _startZ;
+    private float _maxReachedZ;
+    private float _endZ;
+
 
     private void Awake()
     {
         SoundController.SetSoundMute(IsMute());
+        UIController.SetLevel(LevelIndex + 1);
+    }
+
+    private void Start()
+    {
+        _startZ = 0;
+        _maxReachedZ = 0;
+        GameObject finish = GameObject.Find("Finish");
+        _endZ = finish.transform.position.z;
     }
 
     public void OnPlayerDied()
@@ -54,9 +67,9 @@ public class Game : PlayerData
         return SoundMute == Constants.MUTE_KEY;
     }
 
-    public void DoMute(bool value)
+    public void DoMute(bool isMute)
     {
-        if (value) SoundMute = Constants.MUTE_KEY;
+        if (isMute) SoundMute = Constants.MUTE_KEY;
         else SoundMute = Constants.UNMUTE_KEY;
         SoundController.SetSoundMute(IsMute());
     }
@@ -64,5 +77,11 @@ public class Game : PlayerData
     public void ChangeLifes(int value)
     {
         PlayerLifes += value;
+    }
+
+    public void SetProgress(float maxReachedZ)
+    {
+        _maxReachedZ = Mathf.Max(_maxReachedZ, maxReachedZ);
+        UIController.SetProgress(Mathf.InverseLerp(_startZ, _endZ, _maxReachedZ));
     }
 }
