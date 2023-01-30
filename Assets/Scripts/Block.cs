@@ -5,14 +5,14 @@ using TMPro;
 
 public class Block : MonoBehaviour
 {
-    public int Cost;
+    public int Cost { get; private set; }
     public TextMeshPro[] Texts;
     private Material _material;
 
     private void Awake()
     {
         _material = gameObject.GetComponent<MeshRenderer>().material;
-        SetCost(Cost);
+        SetCost(50);
     }
 
     public void SetCost (int value)
