@@ -60,6 +60,10 @@ public class SnakePart : MonoBehaviour
         Block block = otherGO.GetComponent<Block>();
         if (block)
         {
+            Vector3 normal = -collision.contacts[0].normal.normalized;
+            float dot = Vector3.Dot(normal, Vector3.forward);
+            Debug.Log(dot);
+            if (dot < 0.7) return;
             Player.ChangeLifes(-1);
             block.SetCost(block.Cost - 1);
             return;
