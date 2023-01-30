@@ -1326,7 +1326,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 0
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
@@ -1915,8 +1915,6 @@ MonoBehaviour:
   Road: {fileID: 215908583}
   Length: 40
   Game: {fileID: 194970185}
-  _startLength: 10
-  _endLength: 15
 --- !u!1 &1487975229
 GameObject:
   m_ObjectHideFlags: 0
