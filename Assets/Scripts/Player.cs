@@ -12,6 +12,9 @@ public class Player : MonoBehaviour
     public GameObject Parent;
     public GameObject SnakePartPrefab;
     public Game Game;
+    public float Sensitivity { get; private set; }
+    public float Velosity { get; private set; }
+    public Vector3 Couner { get; private set; }
 
     private int _lifes;
     [SerializeField]
@@ -19,10 +22,15 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _sensitivity/* = 2.25f*/;
     [SerializeField]
-    private float _velosity/* = 30f*/;
+    private float _velosity/* = 60f*/;
+    [SerializeField]
+    private Vector3 _couner/* = new Vector3(8, 0, 2)*/;
 
     private void Awake()
     {
+        Sensitivity = _sensitivity;
+        Velosity = _velosity;
+        Couner = _couner;
         gameObject.SetActive(true);
         _lifes = Game.PlayerLifes;
         SetText();
