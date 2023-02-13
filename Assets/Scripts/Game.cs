@@ -17,6 +17,7 @@ public class Game : PlayerData
     {
         SoundController.SetSoundMute(IsMute());
         UIController.SetLevel(LevelIndex + 1);
+        CurrentState = Constants.State.Playing;
     }
 
     private void Start()

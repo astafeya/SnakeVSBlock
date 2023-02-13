@@ -2,6 +2,7 @@
 
 using UnityEngine;
 using Random = System.Random;
+using System.Collections.Generic;
 
 public class LevelCreator : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class LevelCreator : MonoBehaviour
     public GameObject Road;
     public int Length;
     public Game Game;
+    public Player Player;
 
     private int _startLength = 10;
     private int _endLength = 15;
@@ -20,12 +22,35 @@ public class LevelCreator : MonoBehaviour
     private bool _blockOnPrevRow;
     private bool _blockOnThisRow;
     private int _notUsedBlocks;
+    private List<GameObject> _levelObjects;
+    private float offset = 7;
 
     private void Awake()
     {
         _random = new Random(Game.LevelIndex);
+        _levelObjects = new List<GameObject>();
         SetLevelLength();
         CreateFoodAndBlocks();
+    }
+
+    private void Update()
+    {
+        if (Game.CurrentState != Constants.State.Playing
+            || Player.Snake.Count <= 0
+            || _levelObjects.Count <= 0) return;
+        if (_levelObjects[0] == null)
+        {
+            _levelObjects.RemoveAt(0);
+            return;
+        }
+        float playerHeadPosZ = Player.Snake[0].transform.position.z;
+        float z = _levelObjects[0].transform.position.z;
+        if (z + offset < playerHeadPosZ)
+        {
+            GameObject objectForHide = _levelObjects[0];
+            objectForHide.SetActive(false);
+            _levelObjects.RemoveAt(0);
+        }
     }
 
     private int RandomRange(int min, int max)
@@ -114,6 +139,7 @@ public class LevelCreator : MonoBehaviour
         Block bblock = block.GetComponent<Block>();
         bblock.SetCost(RandomRange(1, 51));
         _blockOnThisRow = true;
+        _levelObjects.Add(block);
     }
 
     private void CreateFood(float x, float y, float z)
@@ -122,5 +148,6 @@ public class LevelCreator : MonoBehaviour
         food.transform.localPosition = new Vector3(x, y, z + _startLength) + _foodPositionInaccuracy;
         Food ffood = food.GetComponent<Food>();
         ffood.SetLifes(RandomRange(1, 6));
+        _levelObjects.Add(food);
     }
 }
