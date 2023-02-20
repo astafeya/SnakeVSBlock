@@ -47,6 +47,7 @@ public class Player : MonoBehaviour
         Snake[0].IsHead = true;
         UpdatePositions();
     }
+
     void Update()
     {
         Vector3 snakeHeadPosition = Snake[0].gameObject.transform.position;
@@ -87,6 +88,7 @@ public class Player : MonoBehaviour
         newPartPosition.z -= 0.5f;
 
         GameObject newPart = Instantiate(SnakePartPrefab, newPartPosition, Quaternion.identity, Parent.transform);
+        newPart.GetComponent<Rigidbody>().mass = 0.0000001f;
         Snake.Add(newPart.GetComponent<SnakePart>());
         Snake[Snake.Count - 1].Player = this;
         Snake[Snake.Count - 1].PreviousPart = Snake[Snake.Count - 2].gameObject;
@@ -98,10 +100,12 @@ public class Player : MonoBehaviour
         SnakePart oldHead = Snake[0];
         Snake.RemoveAt(0);
         if (Snake.Count > 0)
-        { 
-        Snake[0].IsHead = true;
-        Snake[0].PreviousPart = null;
+        {
+            Snake[0].IsHead = true;
+            Snake[0].PreviousPart = null;
+            Snake[0].gameObject.GetComponent<Rigidbody>().mass = 1;
         }
+        oldHead.SetDestroyed(true);
         Destroy(oldHead.gameObject);
         Game.OnPlayerPopHead();
     }

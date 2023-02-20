@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3865343943775524403}
   - component: {fileID: 826771415880223640}
   - component: {fileID: 2814594208687077673}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SnakePart
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34083,11 +34083,7 @@ MonoBehaviour:
   IsHead: 0
   Player: {fileID: 0}
   PreviousPart: {fileID: 0}
-  Material: {fileID: 2100000, guid: d0b142706ddcd134abeae9f5790fe523, type: 2}
-  Position: 0
-  _sensitivity: 2.25
-  _velosity: 60
-  _couner: {x: 8, y: 0, z: 2}
+  SnakePartDestroy: {fileID: 5260549061144175447, guid: c0ad4cc411b4d114a9cee923cbf0dd22, type: 3}
 --- !u!54 &3865343943775524403
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -34102,7 +34098,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 4
   m_CollisionDetection: 2
 --- !u!33 &826771415880223640
 MeshFilter:
