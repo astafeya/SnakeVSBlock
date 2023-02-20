@@ -81,6 +81,7 @@ public class SnakePart : MonoBehaviour
         Finish finish = otherGO.GetComponent<Finish>();
         if (finish)
         {
+            finish.PlayConfetty();
             Player.Win();
         }
     }
