@@ -48,8 +48,8 @@ public class LevelCreator : MonoBehaviour
         if (z + offset < playerHeadPosZ)
         {
             GameObject objectForHide = _levelObjects[0];
-            objectForHide.SetActive(false);
             _levelObjects.RemoveAt(0);
+            Destroy(objectForHide);
         }
     }
 
@@ -138,6 +138,7 @@ public class LevelCreator : MonoBehaviour
         block.transform.localPosition = new Vector3(x, y, z + _startLength) + _blockPositionInaccuracy;
         Block bblock = block.GetComponent<Block>();
         bblock.SetCost(RandomRange(1, 51));
+        bblock.Parent = gameObject;
         _blockOnThisRow = true;
         _levelObjects.Add(block);
     }
