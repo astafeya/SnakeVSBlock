@@ -7,11 +7,16 @@ public class Block : MonoBehaviour
 {
     public int Cost { get; private set; }
     public TextMeshPro[] Texts;
+    public GameObject BlockDestroy;
+    public GameObject Parent;
+
     private Material _material;
+    private bool _destroyedByPlayer;
 
     private void Awake()
     {
         _material = gameObject.GetComponent<MeshRenderer>().material;
+        _destroyedByPlayer = false;
         SetCost(50);
     }
 
@@ -25,7 +30,16 @@ public class Block : MonoBehaviour
         }
         if (Cost == 0)
         {
+            _destroyedByPlayer = true;
             Destroy(gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        if (!_destroyedByPlayer) return;
+        GameObject blockDestroy = Instantiate(BlockDestroy, transform.position, Quaternion.identity, Parent.transform);
+        ParticleSystem particleSystem = blockDestroy.GetComponent<ParticleSystem>();
+        particleSystem.Play();
     }
 }

@@ -1,5 +1,6 @@
 /* (c) Irina Astafeva, 2023 */
 
+using System;
 using UnityEngine;
 
 public class SnakePart : MonoBehaviour
@@ -8,25 +9,35 @@ public class SnakePart : MonoBehaviour
     public bool IsHead;
     public Player Player;
     public GameObject PreviousPart;
+    public GameObject SnakePartDestroy;
 
     private float _previousMousePosition;
     private Material _material;
-    public float _position;
+    private float _position;
+    private bool _destroyedByBlock;
+    private Vector3 _previousPosition;
 
     private void Awake()
     {
         _position = 0;
         _material = gameObject.GetComponent<MeshRenderer>().material;
         _material.SetFloat("_Position", _position);
+        _destroyedByBlock = false;
+        _previousPosition = transform.position;
     }
 
     private void Update()
     {
+        _previousPosition = transform.position;
         if (!IsHead)
         {
             Vector3 newVelosity = PreviousPart.transform.position - transform.position;
             newVelosity.x *= Player.Couner.x;
             newVelosity.z *= Player.Couner.z;
+            if (Math.Abs(PreviousPart.transform.position.x - transform.position.x) > 0.5f)
+            {
+                newVelosity.z *= 3;
+            }
             Rigidbody.velocity = newVelosity * Player.Velosity * Time.deltaTime;
             return;
         }
@@ -56,7 +67,6 @@ public class SnakePart : MonoBehaviour
         {
             Vector3 normal = -collision.contacts[0].normal.normalized;
             float dot = Vector3.Dot(normal, Vector3.forward);
-            Debug.Log(dot);
             if (dot < 0.7) return;
             Player.ChangeLifes(-1);
             block.SetCost(block.Cost - 1);
@@ -79,5 +89,23 @@ public class SnakePart : MonoBehaviour
     {
         _position = position;
         _material.SetFloat("_Position", _position);
+    }
+
+    public void SetDestroyed(bool value)
+    {
+        _destroyedByBlock = value;
+    }
+
+    public Vector3 GetPreviousPosition()
+    {
+        return _previousPosition;
+    }
+
+    private void OnDestroy()
+    {
+        if (!_destroyedByBlock) return;
+        GameObject snakePartDestroy = Instantiate(SnakePartDestroy, transform.position, Quaternion.identity, Player.Parent.transform);
+        ParticleSystem particleSystem = snakePartDestroy.GetComponent<ParticleSystem>();
+        particleSystem.Play();
     }
 }

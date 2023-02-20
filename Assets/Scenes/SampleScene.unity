@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028355, g: 0.22571374, b: 0.30692255, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1801,8 +1801,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 971418175}
-  - component: {fileID: 971418177}
   - component: {fileID: 971418176}
+  - component: {fileID: 971418177}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1845,9 +1845,9 @@ MonoBehaviour:
   SnakePartPrefab: {fileID: 9170187556676131198, guid: 2da4f2d8d4bf26d4ba8aed19e86f5a0a, type: 3}
   Game: {fileID: 194970185}
   Offset: {x: -0.75, y: 1.4, z: 0}
-  _sensitivity: 2.25
+  _sensitivity: 50
   _velosity: 60
-  _couner: {x: 8, y: 0, z: 2}
+  _couner: {x: 12, y: 0, z: 2}
 --- !u!54 &971418177
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2045,7 +2045,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31086
+  m_Name: pb_Mesh27620
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
