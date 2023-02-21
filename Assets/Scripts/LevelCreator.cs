@@ -23,7 +23,7 @@ public class LevelCreator : MonoBehaviour
     private bool _blockOnThisRow;
     private int _notUsedBlocks;
     private List<GameObject> _levelObjects;
-    private float offset = 7;
+    private float _offset = 7;
 
     private void Awake()
     {
@@ -45,7 +45,7 @@ public class LevelCreator : MonoBehaviour
         }
         float playerHeadPosZ = Player.Snake[0].transform.position.z;
         float z = _levelObjects[0].transform.position.z;
-        if (z + offset < playerHeadPosZ)
+        if (z + _offset < playerHeadPosZ)
         {
             GameObject objectForHide = _levelObjects[0];
             _levelObjects.RemoveAt(0);

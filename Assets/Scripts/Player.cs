@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     public Game Game;
     public float Sensitivity { get; private set; }
     public float Velosity { get; private set; }
+    public float Drag { get; private set; }
     public Vector3 Couner { get; private set; }
 
     private int _lifes;
@@ -24,13 +25,16 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _velosity/* = 60f*/;
     [SerializeField]
+    private float _drag/* = 60f*/;
+    [SerializeField]
     private Vector3 _couner/* = new Vector3(8, 0, 2)*/;
 
     private void Awake()
     {
-        Sensitivity = _sensitivity;
-        Velosity = _velosity;
-        Couner = _couner;
+        Sensitivity = 10;
+        Velosity = 60;
+        Couner = new Vector3(12, 0, 2);
+        Drag = 0;
         gameObject.SetActive(true);
         _lifes = Game.PlayerLifes;
         SetText();
@@ -118,6 +122,8 @@ public class Player : MonoBehaviour
     public void Win()
     {
         Game.OnPlayerWin();
+        Velosity = 0;
+        Drag = 100;
     }
 
     public void Lose()

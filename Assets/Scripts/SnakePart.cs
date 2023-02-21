@@ -15,7 +15,6 @@ public class SnakePart : MonoBehaviour
     private Material _material;
     private float _position;
     private bool _destroyedByBlock;
-    private Vector3 _previousPosition;
 
     private void Awake()
     {
@@ -23,12 +22,10 @@ public class SnakePart : MonoBehaviour
         _material = gameObject.GetComponent<MeshRenderer>().material;
         _material.SetFloat("_Position", _position);
         _destroyedByBlock = false;
-        _previousPosition = transform.position;
     }
 
     private void Update()
     {
-        _previousPosition = transform.position;
         if (!IsHead)
         {
             Vector3 newVelosity = PreviousPart.transform.position - transform.position;
@@ -39,6 +36,7 @@ public class SnakePart : MonoBehaviour
                 newVelosity.z *= 3;
             }
             Rigidbody.velocity = newVelosity * Player.Velosity * Time.deltaTime;
+            Rigidbody.drag = Player.Drag;
             return;
         }
         Vector3 moving = Vector3.forward * Player.Velosity;
@@ -48,6 +46,7 @@ public class SnakePart : MonoBehaviour
             moving.x = mouse * Player.Sensitivity;
         }
         Rigidbody.velocity = moving * Time.deltaTime;
+        Rigidbody.drag = Player.Drag;
         _previousMousePosition = Input.mousePosition.x;
     }
 
@@ -95,11 +94,6 @@ public class SnakePart : MonoBehaviour
     public void SetDestroyed(bool value)
     {
         _destroyedByBlock = value;
-    }
-
-    public Vector3 GetPreviousPosition()
-    {
-        return _previousPosition;
     }
 
     private void OnDestroy()
